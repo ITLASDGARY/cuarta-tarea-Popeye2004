@@ -22,13 +22,17 @@ namespace EjerciciosCS
         /// <returns>El promedio de las 5 temperaturas</returns>
         public double CalcularPromedioTemperatura()
         {
-            // TODO: Implementar el cálculo del promedio de temperaturas
-            double promedio = 0.0; 
+           double[] temperaturas = new double[5] { 23.5, 24.0, 22.8, 25.2, 24.5 };
             
+            double suma = 0;
+            for (int i = 0; i < temperaturas.Length; i++)
+            {
+                suma += temperaturas[i];
+            }
             
+            double promedio = suma / temperaturas.Length;
             return promedio;
         }
-
         /// <summary>
         /// 2. LISTA DE SUPERMERCADO (Listas)
         /// 
@@ -43,10 +47,40 @@ namespace EjerciciosCS
         /// <returns>Una List<string> con los productos ingresados por el usuario</returns>
         public List<string> CrearListaCompras()
         {
-            // TODO: Implementar la lista de compras interactiva
-            List<string> listaCompras = new List<string>();
+              List<string> listaCompras = new List<string>();
             
-
+            Console.WriteLine("=== LISTA DE COMPRAS ===");
+            Console.WriteLine("Ingresa los productos (escribe 'salir' para terminar):");
+            
+            while (true)
+            {
+                Console.Write("Producto: ");
+                string producto = Console.ReadLine();
+                
+                if (producto?.ToLower() == "salir")
+                {
+                    break;
+                }
+                
+                if (!string.IsNullOrWhiteSpace(producto))
+                {
+                    listaCompras.Add(producto);
+                }
+            }
+            
+            Console.WriteLine("\n=== TU LISTA DE COMPRAS ===");
+            if (listaCompras.Count > 0)
+            {
+                foreach (string item in listaCompras)
+                {
+                    Console.WriteLine($"- {item}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No ingresaste ningún producto.");
+            }
+            
             return listaCompras;
         }
 
@@ -68,14 +102,41 @@ namespace EjerciciosCS
         /// <returns>true si el número está en el array, false si no</returns>
         public bool BuscarNumeroDinamico(int numeroBuscado)
         {
-            // TODO: Implementar la búsqueda de número en array aleatorio
-            bool encontrado = false;
             Random random = new Random();
             
-
+            int[] numerosAleatorios = new int[10];
+            
+            for (int i = 0; i < numerosAleatorios.Length; i++)
+            {
+                numerosAleatorios[i] = random.Next(0, 101);
+            }
+            
+            Console.WriteLine("Números generados:");
+            for (int i = 0; i < numerosAleatorios.Length; i++)
+            {
+                Console.Write($"{numerosAleatorios[i]} ");
+            }
+            Console.WriteLine();
+            Console.WriteLine($"Buscando el número: {numeroBuscado}");
+            
+            bool encontrado = false;
+            for (int i = 0; i < numerosAleatorios.Length; i++)
+            {
+                if (numerosAleatorios[i] == numeroBuscado)
+                {
+                    encontrado = true;
+                    Console.WriteLine($"¡Número encontrado en la posición {i}!");
+                    break;
+                }
+            }
+            
+            if (!encontrado)
+            {
+                Console.WriteLine("Número no encontrado en el array.");
+            }
+            
             return encontrado;
         }
-
         
     }
 }
